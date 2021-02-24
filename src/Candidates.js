@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { STORAGE_KEY } from "./utils/localStorageInfo";
 import votePink from "./assets/votepink.svg";
 import voteBlue from "./assets/voteblue.svg";
@@ -53,7 +52,7 @@ export default function Candidates({
           </div>
         )
       }
-      <div className={`flex ${isImage ? "flex-col" : "flex-col"}`}>
+      <div className={`flex w-48 ${isImage ? "flex-col" : "flex-col"}`}>
         {candidates.map((candidate, index) => {
           if (poll.type === "text") {
             return (
@@ -80,7 +79,7 @@ export default function Candidates({
                     {candidate.upvotes}
                   </p>
                 </div>
-                <div className="flex mx-8">
+                <div className="flex justify-center flex-1 mx-8">
                   <p className="text-xl font-semibold">{candidate.name}</p>
                 </div>
               </div>
@@ -88,7 +87,7 @@ export default function Candidates({
           }
           return (
             <div className="flex items-center" key={candidate.id}>
-              <div className="hidden sm:block">
+              <div className="">
                 <ImageVoteBlock
                   poll={poll}
                   onUpVote={onUpVote}
@@ -96,27 +95,13 @@ export default function Candidates({
                   index={index}
                 />
               </div>
-              <div
-                className={`flex relative ${
-                  index === Number(0) ? "mb-4" : "mb-0"
-                }`}
-              >
-                <Link style={linkStyle(pollView)} to={`/${poll.id}`}>
-                  <img
-                    src={candidate.image}
-                    style={candidateImageStyle(index)}
-                    className="w-full sm:min-w-80 xs1:w-112 xs2:w-100 xs3:w-88 xs3:h-72 sm:w-full sm:h-64 lg:max-w-2xl min-w-60 min-h-60"
-                    alt="Candidate"
-                  />
-                </Link>
-                <div className="absolute bottom-0 left-0 block mb-2 ml-2 sm:hidden">
-                  <ImageVoteBlock
-                    poll={poll}
-                    onUpVote={onUpVote}
-                    candidate={candidate}
-                    index={index}
-                  />
-                </div>
+              <div className="flex justify-center flex-1 mx-8">
+                <img
+                  src={candidate.image}
+                  style={candidateImageStyle(index)}
+                  className="w-8"
+                  alt="Candidate"
+                />
               </div>
             </div>
           );
@@ -167,12 +152,6 @@ const dataVizStyle = {
   borderRadius: 10,
 };
 
-function linkStyle(pollView) {
-  return {
-    pointerEvents: pollView ? "none" : "auto",
-  };
-}
-
 function candidate1Style(width) {
   return {
     backgroundColor: "#10B981",
@@ -200,9 +179,9 @@ const voteImageContainerStyle = (index, isDisabled) => ({
 });
 
 function candidateImageStyle(index) {
-  const indexzero = index === Number(0);
+  // const indexzero = index === Number(0);
   return {
-    border: `1px solid ${indexzero ? "#10B981" : "#EF4444"}`,
+    // border: `1px solid ${indexzero ? "#10B981" : "#EF4444"}`,
     objectFit: "contain",
   };
 }
