@@ -10,6 +10,7 @@ import {
 import { getPoll as getPollQuery } from "./graphql/queries";
 import slugify from "./utils/slugify";
 import Button from "./Button";
+import loading from "./loading.svg";
 
 let counter;
 let pollId;
@@ -128,7 +129,9 @@ export default function CreatePoll() {
 
   return (
     <div>
-      <h1 className="text-3xl leading-8 sm:text-5xl">Create a new poll</h1>
+      <h1 className="text-2xl font-semibold text-gray-800">
+        Create new feature request
+      </h1>
       <div>
         <p className="mt-6 text-xl">
           What type of poll would you like to create?
@@ -226,7 +229,10 @@ export default function CreatePoll() {
         </div>
       )}
       {isUploading && (
-        <p className="mt-6 text-base">Please wait, file uploading...</p>
+        <div className="flex flex-col items-center justify-center">
+          <img className="h-8 m-8" src={loading} alt="Loading" />
+          Uploading
+        </div>
       )}
       {pollType && (
         <div className="mt-10">
