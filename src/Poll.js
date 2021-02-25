@@ -163,8 +163,7 @@ export default function Poll() {
       </div>
     );
 
-  console.log(params.id);
-  const disqusShortname = "savvy-feedback";
+  const disqusShortname = "savvy-feedback"; // Replace this with your own Disqus unique short name
   const disqusConfig = {
     url: window.location.href,
     identifier: params.id,
@@ -183,7 +182,7 @@ export default function Poll() {
         simulateUpvotes={simulateUpvotes}
         pollView
       />
-      <div className="article-container">
+      <div className="mt-16">
         <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
