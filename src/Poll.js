@@ -9,6 +9,7 @@ import { upVote } from "./gql/mutations";
 import Candidates from "./Candidates";
 import actionTypes from "./actionTypes";
 import loading from "./loading.svg";
+import Disqus from "disqus-react";
 
 const initialState = {
   loading: true,
@@ -56,7 +57,7 @@ export default function Poll() {
   let subscription2;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     fetchPoll();
     return () => {
       subscription1 && subscription1.unsubscribe();
@@ -162,6 +163,14 @@ export default function Poll() {
       </div>
     );
 
+  console.log(params.id);
+  const disqusShortname = "savvy-feedback";
+  const disqusConfig = {
+    url: window.location.href,
+    identifier: params.id,
+    title: state.poll.name,
+  };
+
   return (
     <div className="flex flex-col flex-1">
       <h1 className="text-2xl font-semibold highlight-text">
@@ -174,6 +183,12 @@ export default function Poll() {
         simulateUpvotes={simulateUpvotes}
         pollView
       />
+      <div className="article-container">
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        />
+      </div>
     </div>
   );
 }
